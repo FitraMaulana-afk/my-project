@@ -2,73 +2,74 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Province\StoreProvinceRequest;
-use App\Http\Requests\Province\UpdateProvinceRequest;
-use App\Models\Province;
+use App\Http\Requests\Country\StoreCountryRequest;
+use App\Http\Requests\Country\UpdateCountryRequest;
+use App\Models\Country;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Constraint\Count;
 
 /**
- * Class ProvinceService
+ * Class CountryService
  * @package App\Services
  */
-class ProvinceService
+class CountryService
 {
-    private Province $province;
+    private Country $country;
     public ?string $oldImage = null;
     public ?string $newImage = null;
 
     public function __construct()
     {
-        $this->province = new Province();
+        $this->country = new Country();
     }
 
     public function index(Request $request)
     {
         try {
-            $province = $this->province->query();
+            $country = $this->country->query()->with('user');
 
-            return $province;
-        } catch (\Exception $e) {
+            return $country;
+        } catch (Exception $e) {
             $e->getMessage();
         }
     }
 
-    public function store(StoreProvinceRequest $request)
+    public function store(StoreCountryRequest $request)
     {
         DB::beginTransaction();
         try {
             $data = $request->validated();
-            
 
             if ($request->hasFile('image')) {
-                $this->newImage = $request->file('image')->store('province/image', 'public');
+                $this->newImage = $request->file('image')->store('country/image', 'public');
                 $data['image'] = $this->newImage;
             }
-            $province = $this->province->create($data);
+            $data['user_id'] = \auth()->id();
+            $country = $this->country->create($data);
             DB::commit();
 
-            return $province;
+            return $country;
         } catch (\Exception $e) {
             DB::rollBack();
             $e->getMessage();
         }
     }
 
-    public function update(UpdateProvinceRequest $request, Province $province)
+    public function update(UpdateCountryRequest $request, Country $country)
     {
         DB::beginTransaction();
         try {
             $data = $request->validated();
 
             if ($request->hasFile('image')) {
-                $this->oldImage = $province->image;
-                $this->newImage = $request->file('image')->store('province/image', 'public');
+                $this->oldImage = $country->image;
+                $this->newImage = $request->file('image')->store('country/image', 'public');
                 $data['image'] = $this->newImage;
             }
-            $province->update($data);
+            $country->update($data);
             DB::commit();
             DB::afterCommit(function () {
                 if (!empty($this->oldImage) && (Storage::disk('public'))->exists($this->oldImage)) {
@@ -76,19 +77,19 @@ class ProvinceService
                 }
             });
 
-            return $province;
+            return $country;
         } catch (Exception $e) {
             DB::rollBack();
             $e->getMessage();
         }
     }
 
-    public function delete(Province $province)
+    public function delete(Country $country)
     {
         DB::beginTransaction();
         try {
-            $this->oldImage = $province->image;
-            $province->delete();
+            $this->oldImage = $country->image;
+            $country->delete();
             DB::commit();
             DB::afterCommit(function () {
                 if (!empty($this->oldImage) && (Storage::disk('public'))->exists($this->oldImage)) {
@@ -96,7 +97,7 @@ class ProvinceService
                 }
             });
 
-            return $province;
+            return $country;
         } catch (Exception $e) {
         }
     }

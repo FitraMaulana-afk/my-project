@@ -11,4 +11,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::resource('province', 'ProvinceController');
+    Route::resource('country', 'CountryController');
 });

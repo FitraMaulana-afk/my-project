@@ -22,6 +22,9 @@ class StoreProvinceRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'country_id' => [
+                'required',
+            ],
             'name' => [
                 'required',
                 'string',

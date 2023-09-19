@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Province\StoreProvinceRequest;
 use App\Http\Requests\Province\UpdateProvinceRequest;
+use App\Models\Country;
 use App\Models\Province;
 use App\Services\ProvinceService;
 use Exception;
@@ -14,10 +15,12 @@ class ProvinceController extends Controller
 {
     public string $provinceView = 'dashboard.province.';
     public ProvinceService $provinceService;
+    public Country $country;
 
     public function __construct()
     {
         $this->provinceService = new ProvinceService;
+        $this->country = new Country();
     }
 
     public function index(Request $request)
@@ -35,8 +38,9 @@ class ProvinceController extends Controller
     public function create()
     {
         $provinceView = $this->provinceView;
+        $countries = $this->country->query()->get();
 
-        return view($provinceView . 'create');
+        return view($provinceView . 'create', \compact('countries'));
     }
 
     public function store(StoreProvinceRequest $request)
@@ -54,15 +58,17 @@ class ProvinceController extends Controller
     public function show(Province $province)
     {
         $provinceView = $this->provinceView;
+        $countries = $this->country->query()->get();
 
-        return view($provinceView . 'show', \compact('province'));
+        return view($provinceView . 'show', \compact('province','countries'));
     }
 
     public function edit(Province $province)
     {
         $provinceView = $this->provinceView;
-
-        return view($provinceView . 'edit', \compact('province'));
+        $countries = $this->country->query()->get();
+        
+        return view($provinceView . 'edit', \compact('province','countries'));
     }
 
     public function update(UpdateProvinceRequest $request, Province $province)

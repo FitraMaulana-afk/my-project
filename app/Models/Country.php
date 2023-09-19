@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Province extends Model
+class Country extends Model
 {
     use HasFactory, Sluggable;
 
     protected $fillable = [
-        'country_id',
+        'user_id',
         'name',
         'description',
         'image',
@@ -29,9 +29,14 @@ class Province extends Model
         ];
     }
 
-    public function country(): BelongsTo
+    public function user() : BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function provincies() : HasMany
+    {
+        return $this->hasMany(Province::class);
     }
 
     public function destinations(): HasMany

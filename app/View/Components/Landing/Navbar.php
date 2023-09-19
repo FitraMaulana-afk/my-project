@@ -7,14 +7,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Base extends Component
+class Navbar extends Component
 {
+    private Country $country;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        $this->country = new Country();
     }
 
     /**
@@ -22,6 +23,7 @@ class Base extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('landing.layouts.base');
+        $countries = $this->country->query()->get();
+        return view('components.landing.navbar', \compact('countries'));
     }
 }

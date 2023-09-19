@@ -17,7 +17,7 @@
             </div>
 
             <button type="submit"
-                class="float-right text-white  bg-primaryOrange hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Login</button>
+                class="float-right text-white  bg-primaryBlue hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Login</button>
         </form>
     </div>
 </x-dashboard.guest>

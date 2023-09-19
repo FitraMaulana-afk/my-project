@@ -28,7 +28,6 @@
 </head>
 
 <body class=" font-poppins">
-
     <main class="flex flex-col w-full">
         {{ $slot }}
     </main>

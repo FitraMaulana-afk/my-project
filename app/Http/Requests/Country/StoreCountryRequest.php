@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Province;
+namespace App\Http\Requests\Country;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProvinceRequest extends FormRequest
+class StoreCountryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,19 +22,16 @@ class UpdateProvinceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_id' => [
-                'nullable',
-            ],
             'name' => [
-                'nullable',
+                'required',
                 'string',
                 'max:50',
             ],
             'description' => [
-                'nullable',
+                'required',
             ],
             'image' => [
-                'nullable',
+                'required',
                 'image',
                 'mimes:png,jpg',
                 'max:2035'
@@ -45,8 +42,11 @@ class UpdateProvinceRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'name.required' => 'Name must be required',
             'name.string' => 'Colom name must be filled with letters',
             'name.max' => 'Name must be no longer than 50 characters',
+            'description.required' => 'Description must be required',
+            'image.required' => 'Image must be required',
             'image.image' => 'Image must be type image',
             'image.mimes' => 'Image must be type png or jpeg',
         ];

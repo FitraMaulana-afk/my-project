@@ -36,7 +36,7 @@
             <div class="font-bold text-xl">
                 {{ $header }}
             </div>
-            <div class="w-full bg-white h-auto shadow-xl py-8 px-6 my-8   rounded-lg">
+            <div class="w-full bg-white h-auto shadow-xl py-8 px-6 my-8 w-  rounded-lg">
                 {{ $slot }}
             </div>
         </div>
@@ -48,6 +48,28 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="{{ asset('assets/js/confirm-alert.js') }}"></script>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            console.log('click');
+            mobileMenu.classList.toggle('w-72');
+            mobileMenu.classList.toggle('ml-0');
+            // mobileMenu.classList.toggle('hidden');
+        });
+
+        const closeToggle = document.getElementById('close-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu');
+
+        closeToggle.addEventListener('click', () => {
+            console.log('click');
+            mobileMenuClose.classList.toggle('w-72');
+            mobileMenuClose.classList.toggle('ml-0');
+            // mobileMenuClose.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>

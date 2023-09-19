@@ -1,8 +1,25 @@
 <div class="flex my-2 justify-between">
     <x-form.label value="Name" for="name" />
     <div class="flex flex-col w-3/4">
-        <x-form.input type="text" name="name" id="name" class="w-full" :value="old('name', $province ?? null)" :required="request()->routeIs('dashboard.province.show')" />
+        <x-form.input type="text" name="name" id="name" class="w-full" :value="old('name', $province ?? null)" :disabled="request()->routeIs('dashboard.province.show')" />
         @error('name')
+            <p class="text-sm text-red-500">{{ $message }}</p>
+        @enderror
+    </div>
+</div>
+<div class="flex my-2 justify-between">
+    <x-form.label value="Country" for="country" />
+    <div class="flex flex-col w-3/4 z-0">
+        <x-form.select name="country_id" id="country_id" :disabled="request()->routeIs('dashboard.province.show')">
+            <option disabled hidden {{ old('country_id') != null ?: 'selected' }}>
+                {{ __('Select Country') }}
+            </option>
+            @foreach ($countries as $country)
+                <option class="z-0" value="{{ $country->id }}" @selected(!empty($province) && $country->id == $province->country_id)>{{ $country->name }}
+                </option>
+            @endforeach
+        </x-form.select>
+        @error('description')
             <p class="text-sm text-red-500">{{ $message }}</p>
         @enderror
     </div>
@@ -10,7 +27,7 @@
 <div class="flex my-2 justify-between">
     <x-form.label value="Description" />
     <div class="flex flex-col w-3/4">
-        <x-form.textarea class="w-full" name="description" id="description" :text="$province->description ?? null" :required="request()->routeIs('dashboard.province.show')" />
+        <x-form.textarea class="w-full" name="description" id="description" :text="$province->description ?? null" :disabled="request()->routeIs('dashboard.province.show')" />
         @error('description')
             <p class="text-sm text-red-500">{{ $message }}</p>
         @enderror

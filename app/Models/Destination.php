@@ -6,17 +6,19 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Province extends Model
+class Destination extends Model
 {
     use HasFactory, Sluggable;
 
     protected $fillable = [
+        'user_id',
         'country_id',
+        'province_id',
         'name',
         'description',
         'image',
+        'status',
         'slug',
     ];
 
@@ -29,13 +31,19 @@ class Province extends Model
         ];
     }
 
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
     }
 
-    public function destinations(): HasMany
+    public function province(): BelongsTo
     {
-        return $this->hasMany(Destination::class);
+        return $this->belongsTo(Province::class);
     }
 }
