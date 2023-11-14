@@ -29,12 +29,19 @@ class Country extends Model
         ];
     }
 
-    public function user() : BelongsTo
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return \is_numeric($value)
+            ? $this->where('id', $value)->firstOrFail() : $this->where('slug', $value)->firstOrFail();
+    }
+
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function provincies() : HasMany
+    public function provincies(): HasMany
     {
         return $this->hasMany(Province::class);
     }

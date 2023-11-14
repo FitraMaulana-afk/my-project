@@ -66,5 +66,4 @@
             <x-pagination :paginator="$countries" />
         @endif
     </div>
-
 </x-dashboard.app>

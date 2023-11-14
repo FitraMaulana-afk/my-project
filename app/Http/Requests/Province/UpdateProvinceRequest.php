@@ -37,7 +37,7 @@ class UpdateProvinceRequest extends FormRequest
                 'nullable',
                 'image',
                 'mimes:png,jpg',
-                'max:2035'
+                'max:4035'
             ],
         ];
     }
@@ -49,6 +49,7 @@ class UpdateProvinceRequest extends FormRequest
             'name.max' => 'Name must be no longer than 50 characters',
             'image.image' => 'Image must be type image',
             'image.mimes' => 'Image must be type png or jpeg',
+            'image.max' => 'The image field must not be greater than 4 megabytes',
         ];
     }
 }

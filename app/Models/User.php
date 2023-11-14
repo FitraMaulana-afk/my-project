@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -44,11 +45,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function countries() : HasMany
+    public function countries(): HasMany
     {
         return $this->hasMany(Country::class);
     }
-    
+
     public function destinations(): HasMany
     {
         return $this->hasMany(Destination::class);

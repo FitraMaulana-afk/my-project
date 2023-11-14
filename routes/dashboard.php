@@ -12,4 +12,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::resource('province', 'ProvinceController');
     Route::resource('country', 'CountryController');
+    Route::resource('destination', 'DestinationController');
+    Route::resource('image', 'ImageController');
 });

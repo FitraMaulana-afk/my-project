@@ -32,9 +32,9 @@ class StoreCountryRequest extends FormRequest
             ],
             'image' => [
                 'required',
-                'image',
-                'mimes:png,jpg',
-                'max:2035'
+                // 'image',
+                // 'mimes:png,jpg',
+                // 'max:4035'
             ],
         ];
     }
@@ -49,6 +49,7 @@ class StoreCountryRequest extends FormRequest
             'image.required' => 'Image must be required',
             'image.image' => 'Image must be type image',
             'image.mimes' => 'Image must be type png or jpeg',
+            'image.max' => 'The image field must not be greater than 4 megabytes',
         ];
     }
 }

@@ -30,6 +30,13 @@ class ProvinceService
         try {
             $province = $this->province->query();
 
+            $province->when(
+                request()->routeIs('landing.province'),
+                function ($query) use ($request) {
+                    $query->where('slug', $request->province);
+                }
+            );
+
             return $province;
         } catch (\Exception $e) {
             $e->getMessage();
@@ -41,7 +48,7 @@ class ProvinceService
         DB::beginTransaction();
         try {
             $data = $request->validated();
-            
+
 
             if ($request->hasFile('image')) {
                 $this->newImage = $request->file('image')->store('province/image', 'public');

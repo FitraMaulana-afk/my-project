@@ -33,10 +33,12 @@
     <div class="w-full h-auto flex justify-between ">
         <x-dashboard.sidebar />
         <div class="flex flex-col md:ml-10 lg:ml-[370px] mt-[120px] md:mr-10 w-full">
-            <div class="font-bold text-xl">
+            <div class="font-bold text-xl mt-4">
                 {{ $header }}
             </div>
-            <div class="w-full bg-white h-auto shadow-xl py-8 px-6 my-8 w-  rounded-lg">
+            <div {!! $attributes->merge([
+                'class' => 'w-full bg-white h-auto shadow-xl py-8 px-6 my-8 rounded-lg',
+            ]) !!}>
                 {{ $slot }}
             </div>
         </div>

@@ -50,7 +50,7 @@ class CountryController extends Controller
 
             return \to_route($countryView . 'index');
         } catch (\Exception $e) {
-            $e->getMessage();
+            dd($e->getMessage());
         }
     }
 

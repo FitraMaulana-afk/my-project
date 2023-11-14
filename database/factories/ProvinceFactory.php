@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 
@@ -18,6 +19,7 @@ class ProvinceFactory extends Factory
     public function definition(): array
     {
         return [
+            'country_id' => Country::factory(),
             'name' => $this->faker->name(),
             'description' => $this->faker->text(40),
             'image' => UploadedFile::fake()->image('image.jpg'),

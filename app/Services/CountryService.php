@@ -29,7 +29,7 @@ class CountryService
     public function index(Request $request)
     {
         try {
-            $country = $this->country->query()->with('user');
+            $country = $this->country->query()->with('user')->orderBy('name');
 
             return $country;
         } catch (Exception $e) {
@@ -99,6 +99,7 @@ class CountryService
 
             return $country;
         } catch (Exception $e) {
+            $e->getMessage();
         }
     }
 }

@@ -29,6 +29,13 @@ class Province extends Model
         ];
     }
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return \is_numeric($value)
+            ? $this->where('id', $value)->firstOrFail() : $this->where('slug', $value)->firstOrFail();
+    }
+
+
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);

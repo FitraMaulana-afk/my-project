@@ -1,5 +1,5 @@
 <div id="mobile-menu"
-    class="min-h-screen w-0 lg:flex  -ml-40 lg:ml-6 transition-all ease-in-out duration-150 flex-col  mb-8 lg:my-8 lg:w-[300px] z-30  lg:mx-6 fixed lg:rounded-lg bg-white shadow-xl ">
+    class="min-h-screen w-0 lg:flex  -ml-40 lg:ml-6 transition-all ease-in-out duration-150 flex-col  mb-8 lg:mb-8 lg:mt-10 lg:w-[300px] z-30  lg:mx-6 fixed lg:rounded-lg bg-white shadow-xl ">
     <div class="lg:hidden flex w-full items-center justify-between">
         <div class="px-4 py-2 mx-6 my-6">
             <a href="" class="flex items-center justify-center w-full">
@@ -29,16 +29,7 @@
         <ul class="">
             <li
                 class="font-semibold text-dark flex items-center hover:text-white hover:bg-primaryBlue transition-all ease-in-out py-4 px-6 rounded-lg duration-150">
-                <a class="flex items-center text-center" href="{{ route('dashboard.country.index') }}">
-                    <i class="fa-solid fa-user mr-4"></i>
-                    <span>User</span>
-                </a>
-            </li>
-        </ul>
-        <ul class="">
-            <li
-                class="font-semibold text-dark flex items-center hover:text-white hover:bg-primaryBlue transition-all ease-in-out py-4 px-6 rounded-lg duration-150">
-                <a class="flex items-center text-center" href="{{ route('dashboard.country.index') }}">
+                <a class="flex items-center text-center" href="{{ route('dashboard.destination.index') }}">
                     <i class="fa-solid fa-map mr-3"></i>
                     <span>Destination</span>
                 </a>
@@ -53,6 +44,7 @@
                 </a>
             </li>
         </ul>
+
         <ul class="">
             <li
                 class="font-semibold text-dark flex items-center hover:text-white hover:bg-primaryBlue transition-all ease-in-out py-4 px-6 rounded-lg duration-150">
@@ -62,7 +54,15 @@
                 </a>
             </li>
         </ul>
-
+        {{-- <ul class="">
+            <li
+                class="font-semibold text-dark flex items-center hover:text-white hover:bg-primaryBlue transition-all ease-in-out py-4 px-6 rounded-lg duration-150">
+                <a class="flex items-center text-left" href="{{ route('dashboard.image.index') }}"><i
+                        class="fa-solid fa-images mr-3"></i>
+                    <span>Image for Destination</span>
+                </a>
+            </li>
+        </ul> --}}
     </div>
 
     <div class="mx-6 mt-10" class="w-full">

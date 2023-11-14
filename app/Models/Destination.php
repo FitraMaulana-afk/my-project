@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\PublishStatusEnum;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Destination extends Model
 {
@@ -15,7 +17,7 @@ class Destination extends Model
         'user_id',
         'country_id',
         'province_id',
-        'name',
+        'title',
         'description',
         'image',
         'status',
@@ -26,9 +28,16 @@ class Destination extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'title'
             ]
         ];
+    }
+
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return \is_numeric($value)
+            ? $this->where('id', $value)->firstOrFail() : $this->where('slug', $value)->firstOrFail();
     }
 
 
@@ -45,5 +54,20 @@ class Destination extends Model
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function getIsYesAttribute(): bool
+    {
+        return (int) $this->status === PublishStatusEnum::STATUS['Yes'];
+    }
+
+    public function getIsNoAttribute(): bool
+    {
+        return (int) $this->status === PublishStatusEnum::STATUS['No'];
     }
 }

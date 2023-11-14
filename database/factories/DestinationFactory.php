@@ -25,7 +25,7 @@ class DestinationFactory extends Factory
             'user_id' => User::factory(),
             'country_id' => Country::factory(),
             'province_id' => Province::factory(),
-            'name' => $this->faker->streetName(),
+            'title' => $this->faker->streetName(),
             'description' => $this->faker->text(40),
             'image' => UploadedFile::fake()->image('image.jpg'),
             'slug' => $this->faker->slug(),

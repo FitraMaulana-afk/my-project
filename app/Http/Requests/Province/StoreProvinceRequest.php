@@ -37,7 +37,7 @@ class StoreProvinceRequest extends FormRequest
                 'required',
                 'image',
                 'mimes:png,jpg',
-                'max:2035'
+                'max:4035'
             ],
         ];
     }
@@ -52,6 +52,7 @@ class StoreProvinceRequest extends FormRequest
             'image.required' => 'Image must be required',
             'image.image' => 'Image must be type image',
             'image.mimes' => 'Image must be type png or jpeg',
+            'image.max' => 'The image field must not be greater than 4 megabytes',
         ];
     }
 }
